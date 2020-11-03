@@ -11,24 +11,20 @@ class AuthController extends Controller
     //
 
     public function login(Request $request){
-        // dd($request);
+       
         $credentials = [
             'email' => $request->get('email'),
             'password' => $request->get('password')
         ];
-        $token = Auth::attempt($credentials);
-        dd($token);
+        $token = auth()->attempt($credentials);
+        
+        info($token);
         if(!$token){
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this.respondWithToken($token);
+        return ['token' => $token , 'user' => auth()->user()];
     }
-    public function respondWithToken($token){
-        return response()->json([
-            'accesss_token' => $token,
-            'token_type' => 'bearer'
-            // 'expirens_in' => 3000
-        ]);
-    }
+
+
 
 }
