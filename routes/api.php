@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login', [ AuthController::class, 'login']);
 Route::post('/is-logged', [ AuthController::class, 'isLogged']);
+Route::post('/logout', [ AuthController::class, 'logout']);
 // Route::group([
 //     'middleware' => 'api',
 //     'prefix' => 'auth'
