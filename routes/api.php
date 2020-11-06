@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleriesController;
+use App\Http\Controllers\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,7 +29,8 @@ Route::post('/register', [ AuthController::class, 'register']);
 Route::get('/galleries', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 
-
+//AUTHOR ROUTES
+Route::get('/authors/{id}', [AuthorController::class, 'show']);
 // Route::group([
 //     'middleware' => 'api',
 //     'prefix' => 'auth'
