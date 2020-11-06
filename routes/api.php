@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GalleriesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,11 +18,15 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//AUTH ROUTES
 Route::post('/login', [ AuthController::class, 'login']);
 Route::post('/is-logged', [ AuthController::class, 'isLogged']);
 Route::post('/logout', [ AuthController::class, 'logout']);
 Route::post('/register', [ AuthController::class, 'register']);
+
+//GALLERIES ROUTES
+Route::get('/galleries', [GalleriesController::class, 'index']);
+
 
 // Route::group([
 //     'middleware' => 'api',

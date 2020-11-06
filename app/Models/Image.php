@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
+
+    public function gallery()
+    {
+        return $this->belongTo('App\Models\Gallery');
+    }
 }
