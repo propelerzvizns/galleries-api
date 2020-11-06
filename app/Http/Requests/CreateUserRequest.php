@@ -27,10 +27,10 @@ class CreateUserRequest extends FormRequest
             //
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required:email',
-            'password' => ['regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
+            'email' => 'required|email',
+            'password' =>['min:8','regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
             'confirmPassword' => 'same:password',
-            'iAgree' => 'required'
+            'iAgree' => 'accepted'
         ];
     }
 }
