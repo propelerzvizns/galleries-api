@@ -22,5 +22,8 @@ class Gallery extends Model
     {
         return $this->hasMany('App\Models\Image');
     }
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 
 }

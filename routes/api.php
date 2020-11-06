@@ -26,6 +26,7 @@ Route::post('/register', [ AuthController::class, 'register']);
 
 //GALLERIES ROUTES
 Route::get('/galleries', [GalleriesController::class, 'index']);
+Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 
 
 // Route::group([

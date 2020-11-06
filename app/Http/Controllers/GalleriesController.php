@@ -14,7 +14,7 @@ class GalleriesController extends Controller
     public function index()
     {
         //
-        $galleries = Gallery::with('images')->get();
+        $galleries = Gallery::with('images', 'user')->get();
         return $galleries;
     }
 
@@ -38,6 +38,9 @@ class GalleriesController extends Controller
     public function show($id)
     {
         //
+       
+        $response = Gallery::with('images', 'user')->findOrFail($id);
+        return $response;
     }
 
     /**
