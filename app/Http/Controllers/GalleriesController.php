@@ -14,7 +14,7 @@ class GalleriesController extends Controller
     public function index()
     {
         //
-        $galleries = Gallery::all();
+        $galleries = Gallery::with('images')->get();
         return $galleries;
     }
 
