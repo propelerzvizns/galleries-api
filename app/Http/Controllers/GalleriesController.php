@@ -11,10 +11,11 @@ class GalleriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $galleries = Gallery::with('images', 'user')->get();
+        $galleries = Gallery::with('images', 'user')->paginate(10);
+        
         return $galleries;
     }
 
