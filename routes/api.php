@@ -24,7 +24,7 @@ Route::post('/login', [ AuthController::class, 'login']);
 Route::post('/is-logged', [ AuthController::class, 'isLogged']);
 Route::post('/logout', [ AuthController::class, 'logout']);
 Route::post('/register', [ AuthController::class, 'register']);
-
+Route::post('/refresh', [ AuthController::class, 'refresh']);
 //GALLERIES ROUTES
 Route::get('/galleries', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);

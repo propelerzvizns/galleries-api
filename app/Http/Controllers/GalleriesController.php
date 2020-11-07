@@ -14,8 +14,12 @@ class GalleriesController extends Controller
     public function index(Request $request)
     {
         //
-        $galleries = Gallery::with('images', 'user')->paginate(10);
-        
+        $title = $request->get('title', '');
+        $galleries = Gallery::search($title);
+        // return $galleries->paginate();
+        // ->paginate(10);
+        // with('images', 'user')->
+
         return $galleries;
     }
 
@@ -39,7 +43,7 @@ class GalleriesController extends Controller
     public function show($id)
     {
         //
-       
+
         $response = Gallery::with('images', 'user')->findOrFail($id);
         return $response;
     }

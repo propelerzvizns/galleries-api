@@ -25,5 +25,18 @@ class Gallery extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    public static function search($title){
+
+        $galleries = Gallery::where('title', 'like', '%'. $title .'%')->with('images', 'user')->paginate(10);
+        //
+        if($galleries->isEmpty()){
+
+            return Gallery::query();
+        } else {
+
+            return $galleries;
+        }
+
+    }
 
 }

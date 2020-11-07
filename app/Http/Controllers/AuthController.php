@@ -22,13 +22,15 @@ class AuthController extends Controller
             'password' => $validated['password']
         ];
         $token = auth()->attempt($credentials);
-
+        $realToken = $this->respondWithToken($token);
         info($token);
         if(!$token){
 
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return ['token' => $token , 'user' => auth()->user()];
+        // dd($token);
+        return ['token' =>  $realToken, 'user' => auth()->user()];
+        // return ;
     }
     public function logout(Request $request){
         // dd($request);
@@ -39,7 +41,7 @@ class AuthController extends Controller
     public function register(CreateUserRequest $request){
         $validated = $request->validated();
 
-        $user = User::create([ 
+        $user = User::create([
             'first_name' => $validated['firstName'],
             'last_name' => $validated['lastName'],
             'email' => $validated['email'],
@@ -52,6 +54,19 @@ class AuthController extends Controller
         return ['token' => $token , 'user' => auth()->user()];
 
     }
+    public function refresh(Request $request)
+    {
+        return $this->respondWithToken(auth()->refresh($request));
+    }
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
+
 
 
 
