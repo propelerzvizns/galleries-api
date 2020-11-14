@@ -15,11 +15,9 @@ class GalleriesController extends Controller
     {
         //
         $title = $request->get('title', '');
-        $galleries = Gallery::search($title);
-        // return $galleries->paginate();
-        // ->paginate(10);
-        // with('images', 'user')->
-
+        $description = $request->get('description', '');
+        $author = $request->get('author', '');
+        $galleries = Gallery::search($title, $description, $author);
         return $galleries;
     }
 
