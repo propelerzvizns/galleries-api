@@ -28,6 +28,8 @@ Route::post('/refresh', [ AuthController::class, 'refresh']);
 //GALLERIES ROUTES
 Route::get('/galleries', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
+Route::post('/galleries', [GalleriesController::class, 'store']);
+
 
 //AUTHOR ROUTES
 Route::get('/authors/{id}', [AuthorController::class, 'show']);

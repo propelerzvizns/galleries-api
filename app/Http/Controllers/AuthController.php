@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\Controller;
 use Illuminate\Support\MessageBag;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -45,7 +46,7 @@ class AuthController extends Controller
             'first_name' => $validated['firstName'],
             'last_name' => $validated['lastName'],
             'email' => $validated['email'],
-            'password' => $validated['password'],
+            'password' => Hash::make($validated['password']),
         ]);
 
 
