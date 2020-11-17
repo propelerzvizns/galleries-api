@@ -33,6 +33,7 @@ Route::post('/galleries', [GalleriesController::class, 'store']);
 
 //AUTHOR ROUTES
 Route::get('/authors/{id}', [AuthorController::class, 'show']);
+Route::get('/authorsGalleries/{id}', [AuthorController::class, 'index']);
 // Route::group([
 //     'middleware' => 'api',
 //     'prefix' => 'auth'

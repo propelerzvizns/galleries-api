@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Gallery;
 
 class AuthorController extends Controller
 {
@@ -12,9 +13,12 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
+        $authorsGalleries = Gallery::where('user_id', $id)->with('images', 'user')->get();
+        return $authorsGalleries;
+
     }
 
     /**

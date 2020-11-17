@@ -42,4 +42,5 @@ class Gallery extends Model
 
     }
 
+
 }
