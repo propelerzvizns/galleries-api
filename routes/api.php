@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ImagesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,6 +35,9 @@ Route::post('/galleries', [GalleriesController::class, 'store']);
 //AUTHOR ROUTES
 Route::get('/author/{id}', [AuthorController::class, 'show']);
 Route::get('/authorsGalleries/{id}', [GalleriesController::class, 'getAuthorGalleries']);
+
+//IMAGES ROUTES
+Route::get('/images/{id}', [ImagesController::class, 'show']);
 // Route::group([
 //     'middleware' => 'api',
 //     'prefix' => 'auth'
