@@ -25,6 +25,11 @@ class GalleriesController extends Controller
         $galleries = Gallery::search($title, $description, $author);
         return $galleries;
     }
+    public function getAuthorGalleries($id, Request $request){
+        $title = $request->get('title', '');
+        $galleries = Gallery::searchByAuthor($id, $title);
+        return $galleries;
+    }
 
     /**
      * Store a newly created resource in storage.

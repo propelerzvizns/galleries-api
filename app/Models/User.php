@@ -45,6 +45,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Gallery::class);
     }
 
+
         // Rest omitted for brevity
 
     /**
@@ -65,5 +66,17 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public static function search($id, $title){
+        // return $searchTerm;
+        // return Gallery::where('title', 'like', '%'. $title .'%')->with('user', 'images')->get();
+    //    $galleries =  Gallery::where('title', 'like', '%'. $title .'%')->get();
+    //    if($galleries->isEmpty()){
+
+    //     return Gallery::query();
+    // } else {
+
+    //     return $galleries;
+    // }
     }
 }

@@ -13,11 +13,15 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id, Request $request)
     {
         //
-        $authorsGalleries = Gallery::where('user_id', $id)->with('images', 'user')->get();
-        return $authorsGalleries;
+        // return $request->get('title');
+        // $page = $request->get('page', '');
+        // $title = $request->get('title', '');
+        // $authorsGalleries = User::search($id, $title);
+        //  = Gallery::where('user_id', $id)->with('images', 'user')->get();
+        // return $authorsGalleries;
 
     }
 

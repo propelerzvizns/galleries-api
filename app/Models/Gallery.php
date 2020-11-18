@@ -41,6 +41,17 @@ class Gallery extends Model
         }
 
     }
+    public static function searchByAuthor($id, $title){
+        // return $title;
+        $galleries = Gallery::with('user', 'images')->where('title', 'like', '%'. $title .'%')->where('user_id', $id)->paginate(10);
+        if($galleries->isEmpty()){
+
+            return Gallery::query();
+        } else {
+
+            return $galleries;
+        }
+    }
 
 
 }

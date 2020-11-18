@@ -17,4 +17,5 @@ class Image extends Model
     {
         return $this->belongTo('App\Models\Gallery');
     }
+
 }
