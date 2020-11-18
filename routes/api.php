@@ -32,7 +32,7 @@ Route::post('/galleries', [GalleriesController::class, 'store']);
 
 
 //AUTHOR ROUTES
-Route::get('/authors/{id}', [AuthorController::class, 'show']);
+Route::get('/author/{id}', [AuthorController::class, 'show']);
 Route::get('/authorsGalleries/{id}', [GalleriesController::class, 'getAuthorGalleries']);
 // Route::group([
 //     'middleware' => 'api',

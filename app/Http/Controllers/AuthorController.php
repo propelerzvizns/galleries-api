@@ -45,7 +45,9 @@ class AuthorController extends Controller
     public function show($id)
     {
         //
-        $author = User::with('galleries')->findOrFail($id);
+        // return $id;
+
+        $author = User::findOrFail($id);
         return $author;
     }
 
