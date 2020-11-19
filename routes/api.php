@@ -43,6 +43,7 @@ Route::get('/images/{id}', [ImagesController::class, 'show']);
 //COMMENTS ROUTE
 Route::get('/comments/{id}', [CommentController::class, 'index']);
 Route::post('/comments', [CommentController::class, 'store']);
+Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
 
 // Route::group([
 //     'middleware' => 'api',
