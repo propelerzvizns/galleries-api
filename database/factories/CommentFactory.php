@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Image;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ImageFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Image::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class ImageFactory extends Factory
     {
         return [
             //
-            'img_url' => 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg',
+            'body' => $this->faker->sentence,
             'gallery_id' => 2
         ];
     }

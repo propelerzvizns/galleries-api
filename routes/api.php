@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleriesController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,6 +39,10 @@ Route::get('/authorsGalleries/{id}', [GalleriesController::class, 'getAuthorGall
 
 //IMAGES ROUTES
 Route::get('/images/{id}', [ImagesController::class, 'show']);
+
+//COMMENTS ROUTE
+Route::get('/comments/{id}', [CommentController::class, 'index']);
+
 // Route::group([
 //     'middleware' => 'api',
 //     'prefix' => 'auth'

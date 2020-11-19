@@ -15,40 +15,32 @@ class Gallery extends Model
         'description',
         'user_id'
     ];
-    // public function comments()
-    // {
-
-    //     return $this->hasMany('App\Models\Comment');
-    // }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function images()
     {
         return $this->hasMany(Image::class);
     }
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
     public static function search($title){
             $galleries = Gallery::with('user','images')
             ->where('title', 'like', '%'. $title .'%')
             ->paginate(10);
-
         if($galleries->isEmpty()){
-
             return Gallery::query();
         } else {
-
             return $galleries;
         }
-
     }
     public static function searchByAuthor($id, $title){
-        // return $title;
         $galleries = Gallery::with('user', 'images')->where('title', 'like', '%'. $title .'%')->where('user_id', $id)->paginate(10);
         if($galleries->isEmpty()){
-
             return Gallery::query();
         } else {
-
             return $galleries;
         }
     }
