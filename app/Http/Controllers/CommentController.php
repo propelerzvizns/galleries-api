@@ -17,10 +17,11 @@ class CommentController extends Controller
     public function index($id)
     {
         //
-        $author_id = $id;
-        $author = User::findOrFail($author_id);
-        $gallery = Gallery::findOrFail($author_id);
+        // $author_id = $id;
+        $gallery = Gallery::findOrFail($id);
         $gallery_id = $gallery->id;
+        $author_id = $gallery->user_id;
+        $author = User::findOrFail($author_id);
 
         $comment = Comment::where('gallery_id', $gallery_id)->get();
         $data = ['comments' => $comment, 'author' => $author];
@@ -36,6 +37,16 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
+        //persist comment
+        $validated = $request->validate([
+            'body' => 'required|max:1000'
+        ]);
+        $comment = Comment::create([
+            'body' => $validated['body'],
+            'gallery_id' => $request->get('galleryId')
+        ]);
+
+        return $comment;
     }
 
     /**
