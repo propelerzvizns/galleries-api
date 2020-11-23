@@ -49,34 +49,31 @@ class GalleriesController extends Controller
             // $request->validate([$inputs[] => 'required']);
 
         // return $request->inputs->image_url;
+
+            // return $data;
         $validated = $request->validate([
             'title' => 'required|min:2|max:255',
             'description' => 'nullable|max:1000',
-            'inputs' => 'required|array',
-            'inputs.*.image_url' => 'required|url'
+            'images' => 'required|array',
+            'images.*.img_url' => 'required|url'
         ]);
-        $user = auth()->user();
+        $user = $request->user_id;
 
         $gallery = Gallery::create([
-            'user_id' => $user->id,
+            'user_id' => $user,
             'title' => $validated['title'],
             'description' => $validated['description']
         ]);
 
-        // $images = Image::create([
-        //     'gallery_id' => $gallery->id,
-        //     'image_url' =>
-        // ])
-        foreach($validated['inputs'] as $image){
-            // dd($gallery);
-            // return $image['image_url'];
+
+        foreach($validated['images'] as $image){
             Image::create([
 
-                'img_url' => $image['image_url'],
+                'img_url' => $image['img_url'],
                 'gallery_id' => $gallery->id
             ]);
         }
-        return $gallery->id;
+        return $request;
         // return $user->id;
     }
 
@@ -104,6 +101,51 @@ class GalleriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // return $request;
+        $gallery = Gallery::findOrFail($id);
+        $validated = $request->validate([
+            'title' => 'required|min:2|max:255',
+            'description' => 'nullable|max:1000',
+            'images' => 'required|array',
+            'images.*.img_url' => 'required|url',
+            'user_id' => 'numeric'
+        ]);
+        $user = $request->user_id;
+
+        foreach($validated['images'] as $imageV){
+            $gallery_id = $imageV['gallery_id'];
+            $images = Image::where('gallery_id', $gallery_id)->get();
+            foreach($images as $image){
+                // return $imageV['gallery_id'];
+                if($image->gallery_id === $imageV['gallery_id']){
+
+                    $gallery->update($imageV);
+                } else {
+                        // $imagedelete = Image::findOrFail($imageId);
+                    $image->delete();
+                }
+            }
+            // return $images;
+            // $imageGalleyId = $imageV['gallery_id'];
+            // $imageId =  $imageV['id'];
+            // if($imageGalleyId === $imageId){
+            //     // return 'true';
+            //     $image = Image::findOrFail($imageId);
+
+            //     $image->update($imageV);
+            // }
+            // else {
+            //     // return 'false';
+
+            //     $image->delete();
+
+            // }
+            // return $imageV['id'];
+            // $image = Image::findOrFail($id);
+            // return $image;
+        }
+
+        return $validated;
     }
 
     /**

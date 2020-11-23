@@ -31,6 +31,7 @@ Route::post('/refresh', [ AuthController::class, 'refresh']);
 Route::get('/galleries', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 Route::post('/galleries', [GalleriesController::class, 'store']);
+Route::put('/galleries/{id}', [GalleriesController::class, 'update']);
 
 
 //AUTHOR ROUTES
