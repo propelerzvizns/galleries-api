@@ -103,49 +103,28 @@ class GalleriesController extends Controller
         //
         // return $request;
         $gallery = Gallery::findOrFail($id);
+        // return $request->galleryToEdit;
+        // $galleryToEdit = $request['galleryToEdit'];
         $validated = $request->validate([
-            'title' => 'required|min:2|max:255',
-            'description' => 'nullable|max:1000',
-            'images' => 'required|array',
-            'images.*.img_url' => 'required|url',
-            'user_id' => 'numeric'
+            'galleryToEdit.title' => 'required|min:2|max:255',
+            'galleryToEdit.description' => 'nullable|max:1000',
+            'galleryToEdit.images' => 'required|array',
+            'galleryToEdit.images.*.img_url' => 'required|url',
+            'galleryToEdit.user_id' => 'numeric'
+
         ]);
-        $user = $request->user_id;
 
-        foreach($validated['images'] as $imageV){
-            $gallery_id = $imageV['gallery_id'];
-            $images = Image::where('gallery_id', $gallery_id)->get();
-            foreach($images as $image){
-                // return $imageV['gallery_id'];
-                if($image->gallery_id === $imageV['gallery_id']){
+        $gallery->update($validated["galleryToEdit"]);
 
-                    $gallery->update($imageV);
-                } else {
-                        // $imagedelete = Image::findOrFail($imageId);
-                    $image->delete();
-                }
-            }
-            // return $images;
-            // $imageGalleyId = $imageV['gallery_id'];
-            // $imageId =  $imageV['id'];
-            // if($imageGalleyId === $imageId){
-            //     // return 'true';
-            //     $image = Image::findOrFail($imageId);
-
-            //     $image->update($imageV);
-            // }
-            // else {
-            //     // return 'false';
-
-            //     $image->delete();
-
-            // }
-            // return $imageV['id'];
-            // $image = Image::findOrFail($id);
-            // return $image;
+        foreach($validated["galleryToEdit"]['images'] as $imageV){
+            $image = Image::findOrFail($imageV["id"]);
+            $image->update($imageV);
         }
-
-        return $validated;
+        foreach($request["inputsToDelete"] as $imageD){
+            $image = Image::findOrFail($imageD["id"]);
+            $image->delete();
+        }
+        return $request;
     }
 
     /**

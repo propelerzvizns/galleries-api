@@ -24,7 +24,7 @@ class ImageFactory extends Factory
         return [
             //
             'img_url' => 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg',
-            'gallery_id' => 2
+            'gallery_id' => 1
         ];
     }
 }
