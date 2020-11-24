@@ -100,25 +100,27 @@ class GalleriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        // return $request;
         $gallery = Gallery::findOrFail($id);
-        // return $request->galleryToEdit;
-        // $galleryToEdit = $request['galleryToEdit'];
         $validated = $request->validate([
             'galleryToEdit.title' => 'required|min:2|max:255',
             'galleryToEdit.description' => 'nullable|max:1000',
             'galleryToEdit.images' => 'required|array',
             'galleryToEdit.images.*.img_url' => 'required|url',
             'galleryToEdit.user_id' => 'numeric'
-
         ]);
 
         $gallery->update($validated["galleryToEdit"]);
-
         foreach($validated["galleryToEdit"]['images'] as $imageV){
-            $image = Image::findOrFail($imageV["id"]);
-            $image->update($imageV);
+            $image = Image::find($imageV['id']);
+            if($image){
+                $image->update($imageV);
+            }
+            elseif(!$image){
+                Image::create([
+                        'img_url' => $imageV['img_url'],
+                        'gallery_id' => $gallery->id
+                        ]);
+            }
         }
         foreach($request["inputsToDelete"] as $imageD){
             $image = Image::findOrFail($imageD["id"]);
