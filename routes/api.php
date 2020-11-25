@@ -32,6 +32,7 @@ Route::get('/galleries', [GalleriesController::class, 'index']);
 Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
 Route::post('/galleries', [GalleriesController::class, 'store']);
 Route::put('/galleries/{id}', [GalleriesController::class, 'update']);
+Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
 
 
 //AUTHOR ROUTES

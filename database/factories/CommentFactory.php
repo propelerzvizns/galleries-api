@@ -24,7 +24,7 @@ class CommentFactory extends Factory
         return [
             //
             'body' => $this->faker->sentence,
-            'gallery_id' => 2
+            'gallery_id' => 3
         ];
     }
 }

@@ -138,5 +138,8 @@ class GalleriesController extends Controller
     public function destroy($id)
     {
         //
+        $gallery = Gallery::findOrfail($id);
+        $gallery->delete();
+        return $gallery;
     }
 }
